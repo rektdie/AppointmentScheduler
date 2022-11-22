@@ -1,0 +1,25 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome back, @User.Identity.Name.Split('@')[0]</h1>
+        <h3>Feel free to view, edit or delete your appointments right away.</h3>
+        <a class="btn btn-primary" asp-controller="Appointments" asp-action="Index">Appointments</a>
+    </div>
+} else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <h3>Register now or log in to start organising your important appointments with us.</h3>
+        <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </div>
+
+}
